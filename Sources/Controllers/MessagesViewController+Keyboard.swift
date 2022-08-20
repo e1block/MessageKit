@@ -80,7 +80,7 @@ extension MessagesViewController {
 
   /// Updates bottom messagesCollectionView inset based on the position of inputContainerView
   internal func updateMessageCollectionViewBottomInset() {
-    let collectionViewHeight = self.parent?.view.frame.height ?? 0
+    let collectionViewHeight = messagesCollectionView.frame.height
     let newBottomInset = collectionViewHeight - (inputContainerView.frame.minY - additionalBottomInset) -
       automaticallyAddedBottomInset
     let normalizedNewBottomInset = max(0, newBottomInset)
@@ -104,7 +104,7 @@ extension MessagesViewController {
   }
 
   private var messageCollectionViewBottomInset: CGFloat {
-    return 0
+    messagesCollectionView.contentInset.bottom
   }
 
   /// UIScrollView can automatically add safe area insets to its contentInset,
