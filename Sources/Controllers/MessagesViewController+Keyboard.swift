@@ -104,7 +104,7 @@ extension MessagesViewController {
   }
 
   private var messageCollectionViewBottomInset: CGFloat {
-    return 0
+    messagesCollectionView.contentInset.bottom
   }
 
   /// UIScrollView can automatically add safe area insets to its contentInset,
