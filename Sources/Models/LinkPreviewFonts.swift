@@ -24,7 +24,13 @@ import Foundation
 import UIKit
 
 public struct LinkPreviewFonts: Equatable {
-  let titleFont: UIFont
-  let teaserFont: UIFont
-  let domainFont: UIFont
+    let titleFont: UIFont
+    let teaserFont: UIFont
+    let domainFont: UIFont
+
+    public init(titleFont: UIFont, teaserFont: UIFont, domainFont: UIFont) {
+        self.titleFont = titleFont
+        self.teaserFont = teaserFont
+        self.domainFont = domainFont
+    }
 }
