@@ -105,11 +105,12 @@ open class MessageContentCell: MessageCollectionViewCell {
       accessoryView,
       cellTopLabel,
       messageTopLabel,
-      messageBottomLabel,
       cellBottomLabel,
       messageContainerView,
       avatarView,
-      messageTimestampLabel)
+      messageTimestampLabel,
+      messageBottomLabel
+    )
   }
 
   // MARK: - Configuration
