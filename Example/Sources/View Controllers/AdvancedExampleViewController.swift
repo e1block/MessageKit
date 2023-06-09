@@ -377,7 +377,7 @@ extension AdvancedExampleViewController: MessagesDisplayDelegate {
     }
 
     return .custom { view in
-      let radius: CGFloat = 16
+      let radius: CGFloat = 9
       let path = UIBezierPath(
         roundedRect: view.bounds,
         byRoundingCorners: corners,
