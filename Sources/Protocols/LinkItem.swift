@@ -49,6 +49,9 @@ public protocol LinkItem {
 
   /// The thumbnail image.
   var thumbnailImage: UIImage { get }
+  
+  /// The open graph image
+  var imageUrl: String { get }
 }
 
 extension LinkItem {
