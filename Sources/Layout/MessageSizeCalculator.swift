@@ -48,6 +48,7 @@ open class MessageSizeCalculator: CellSizeCalculator {
     attributes.avatarLeadingTrailingPadding = avatarLeadingTrailingPadding
 
     attributes.messageContainerPadding = messageContainerPadding(for: message)
+    attributes.newMaskContainerSize = cellNewMaskSize(for: message, at: indexPath)
     attributes.messageContainerSize = messageContainerSize(for: message, at: indexPath)
     attributes.cellTopLabelSize = cellTopLabelSize(for: message, at: indexPath)
     attributes.cellTopLabelAlignment = cellTopLabelAlignment(for: message)
@@ -116,6 +117,17 @@ open class MessageSizeCalculator: CellSizeCalculator {
       let cellHeight = max(avatarHeight, totalLabelHeight)
       return max(cellHeight, accessoryViewHeight)
     }
+  }
+
+  func cellNewMaskSize(for message: MessageType, at indexPath: IndexPath) -> CGSize {
+    let messageContainerHeight = messageContainerSize(for: message, at: indexPath).height
+    let messageBottomLabelHeight = messageBottomLabelSize(for: message, at: indexPath).height
+    let messageTopLabelHeight = messageTopLabelSize(for: message, at: indexPath).height
+    let messageVerticalPadding = messageContainerPadding(for: message).vertical
+
+    let height = messageContainerHeight + messageBottomLabelHeight + messageTopLabelHeight + messageVerticalPadding
+
+    return CGSize(width: messageContainerSize(for: message, at: indexPath).width, height: height)
   }
 
   // MARK: - Avatar

@@ -44,11 +44,16 @@ open class MessageContentCell: MessageCollectionViewCell {
   /// The image view displaying the avatar.
   open var avatarView = AvatarView()
 
-  /// The container used for styling and holding the message's content view.
-  open var messageContainerView: MessageContainerView = {
+  open var newMaskContainerView: MessageContainerView = {
     let containerView = MessageContainerView()
     containerView.clipsToBounds = true
     containerView.layer.masksToBounds = true
+    return containerView
+  }()
+
+  /// The container used for styling and holding the message's content view.
+  open var messageContainerView: MessageContainerView = {
+    let containerView = MessageContainerView()
     return containerView
   }()
 
@@ -101,16 +106,16 @@ open class MessageContentCell: MessageCollectionViewCell {
   }
 
   open func setupSubviews() {
-    contentView.addSubviews(
-      accessoryView,
-      cellTopLabel,
-      messageTopLabel,
-      cellBottomLabel,
-      messageContainerView,
-      avatarView,
-      messageTimestampLabel,
-      messageBottomLabel
-    )
+    contentView.addSubview(accessoryView)
+    contentView.addSubview(cellTopLabel)
+    contentView.addSubview(cellBottomLabel)
+    contentView.addSubview(newMaskContainerView)
+    contentView.addSubview(avatarView)
+    contentView.addSubview(messageTimestampLabel)
+
+    newMaskContainerView.addSubview(messageTopLabel)
+    newMaskContainerView.addSubview(messageContainerView)
+    newMaskContainerView.addSubview(messageBottomLabel)
   }
 
   // MARK: - Configuration
@@ -152,8 +157,9 @@ open class MessageContentCell: MessageCollectionViewCell {
 
     displayDelegate.configureAccessoryView(accessoryView, for: message, at: indexPath, in: messagesCollectionView)
 
-    messageContainerView.backgroundColor = messageColor
-    messageContainerView.style = messageStyle
+    newMaskContainerView.backgroundColor = messageColor
+    newMaskContainerView.style = messageStyle
+    messageContainerView.style = .none
 
     let topCellLabelText = dataSource.cellTopLabelAttributedText(for: message, at: indexPath)
     let bottomCellLabelText = dataSource.cellBottomLabelAttributedText(for: message, at: indexPath)
@@ -278,7 +284,15 @@ open class MessageContentCell: MessageCollectionViewCell {
       fatalError(MessageKitError.avatarPositionUnresolved)
     }
 
-    messageContainerView.frame = CGRect(origin: origin, size: attributes.messageContainerSize)
+    messageContainerView.frame = CGRect(
+      origin: origin,
+      size: attributes.messageContainerSize
+    )
+
+    newMaskContainerView.frame = CGRect(
+      origin: origin,
+      size: attributes.messageContainerSize
+    )
   }
 
   /// Positions the cell's top label.

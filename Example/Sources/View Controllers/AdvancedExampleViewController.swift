@@ -96,15 +96,15 @@ final class AdvancedExampleViewController: ChatViewController {
   }
 
   override func loadMoreMessages() {
-    DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 1) {
-      SampleData.shared.getAdvancedMessages(count: 20) { messages in
-        DispatchQueue.main.async {
-          self.messageList.insert(contentsOf: messages, at: 0)
-          self.messagesCollectionView.reloadDataAndKeepOffset()
-          self.refreshControl.endRefreshing()
-        }
-      }
-    }
+//    DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 1) {
+//      SampleData.shared.getAdvancedMessages(count: 20) { messages in
+//        DispatchQueue.main.async {
+//          self.messageList.insert(contentsOf: messages, at: 0)
+//          self.messagesCollectionView.reloadDataAndKeepOffset()
+//          self.refreshControl.endRefreshing()
+//        }
+//      }
+//    }
   }
 
   override func configureMessageCollectionView() {
@@ -113,29 +113,29 @@ final class AdvancedExampleViewController: ChatViewController {
     let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout
     layout?.sectionInset = UIEdgeInsets(top: 1, left: 8, bottom: 1, right: 8)
 
-    // Hide the outgoing avatar and adjust the label alignment to line up with the messages
-    layout?.setMessageOutgoingAvatarSize(.zero)
-    layout?
-      .setMessageOutgoingMessageTopLabelAlignment(LabelAlignment(
-        textAlignment: .right,
-        textInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)))
-    layout?
-      .setMessageOutgoingMessageBottomLabelAlignment(LabelAlignment(
-        textAlignment: .right,
-        textInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)))
-
-    // Set outgoing avatar to overlap with the message bubble
-    layout?
-      .setMessageIncomingMessageTopLabelAlignment(LabelAlignment(
-        textAlignment: .left,
-        textInsets: UIEdgeInsets(top: 0, left: 18, bottom: outgoingAvatarOverlap, right: 0)))
-    layout?.setMessageIncomingAvatarSize(CGSize(width: 30, height: 30))
-    layout?
-      .setMessageIncomingMessagePadding(UIEdgeInsets(
-        top: -outgoingAvatarOverlap,
-        left: -18,
-        bottom: outgoingAvatarOverlap,
-        right: 18))
+//    // Hide the outgoing avatar and adjust the label alignment to line up with the messages
+//    layout?.setMessageOutgoingAvatarSize(.zero)
+//    layout?
+//      .setMessageOutgoingMessageTopLabelAlignment(LabelAlignment(
+//        textAlignment: .right,
+//        textInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)))
+//    layout?
+//      .setMessageOutgoingMessageBottomLabelAlignment(LabelAlignment(
+//        textAlignment: .right,
+//        textInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 8)))
+//
+//    // Set outgoing avatar to overlap with the message bubble
+//    layout?
+//      .setMessageIncomingMessageTopLabelAlignment(LabelAlignment(
+//        textAlignment: .left,
+//        textInsets: UIEdgeInsets(top: 0, left: 18, bottom: outgoingAvatarOverlap, right: 0)))
+//    layout?.setMessageIncomingAvatarSize(CGSize(width: 30, height: 30))
+//    layout?
+//      .setMessageIncomingMessagePadding(UIEdgeInsets(
+//        top: -outgoingAvatarOverlap,
+//        left: -18,
+//        bottom: outgoingAvatarOverlap,
+//        right: 18))
 
     layout?.setMessageIncomingAccessoryViewSize(CGSize(width: 30, height: 30))
     layout?.setMessageIncomingAccessoryViewPadding(HorizontalEdgeInsets(left: 8, right: 0))
@@ -491,6 +491,10 @@ extension AdvancedExampleViewController: MessagesDisplayDelegate {
 // MARK: MessagesLayoutDelegate
 
 extension AdvancedExampleViewController: MessagesLayoutDelegate {
+
+  func avatarSize(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGSize? {
+    return .zero
+  }
   func cellTopLabelHeight(for _: MessageType, at indexPath: IndexPath, in _: MessagesCollectionView) -> CGFloat {
     if isTimeLabelVisible(at: indexPath) {
       return 18

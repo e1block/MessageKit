@@ -34,6 +34,7 @@ open class MessagesCollectionViewLayoutAttributes: UICollectionViewLayoutAttribu
     copy.avatarSize = avatarSize
     copy.avatarPosition = avatarPosition
     copy.avatarLeadingTrailingPadding = avatarLeadingTrailingPadding
+    copy.newMaskContainerSize = newMaskContainerSize
     copy.messageContainerSize = messageContainerSize
     copy.messageContainerPadding = messageContainerPadding
     copy.messageLabelFont = messageLabelFont
@@ -61,6 +62,7 @@ open class MessagesCollectionViewLayoutAttributes: UICollectionViewLayoutAttribu
       return super.isEqual(object) && attributes.avatarSize == avatarSize
         && attributes.avatarPosition == avatarPosition
         && attributes.avatarLeadingTrailingPadding == avatarLeadingTrailingPadding
+        && attributes.newMaskContainerSize == newMaskContainerSize
         && attributes.messageContainerSize == messageContainerSize
         && attributes.messageContainerPadding == messageContainerPadding
         && attributes.messageLabelFont == messageLabelFont
@@ -91,6 +93,7 @@ open class MessagesCollectionViewLayoutAttributes: UICollectionViewLayoutAttribu
   public var avatarPosition = AvatarPosition(vertical: .cellBottom)
   public var avatarLeadingTrailingPadding: CGFloat = 0
 
+  public var newMaskContainerSize: CGSize = .zero
   public var messageContainerSize: CGSize = .zero
   public var messageContainerPadding: UIEdgeInsets = .zero
   public var messageLabelFont = UIFont.preferredFont(forTextStyle: .body)
